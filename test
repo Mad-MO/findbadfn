@@ -8,6 +8,9 @@ TESTDIR="$(pwd)/testdir"
 
 
 
+# Added emtpy directory, which is dropped by git
+mkdir -p "testdir/Empty/testDirEmpty"
+
 # Run Tool
 ./findbadfn $TESTDIR | tee $LOGFILE
 
