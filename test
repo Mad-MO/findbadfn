@@ -1,11 +1,7 @@
 #!/bin/bash
 
-
-
 LOGFILE="test.log"
 TESTDIR="$(pwd)/testdir"
-
-
 
 # Delete old testdir
 echo "Delete old testdir"
