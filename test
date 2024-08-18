@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+
+LOGFILE="test.log"
+EXPECTED="25"
+TESTDIR="$(pwd)/testdir"
+
+
+
+# Run Tool
+./findbadfn $TESTDIR | tee $LOGFILE
+
+
+
+# Check results
+echo
+echo "Check results"
+findcnt=$(cat $LOGFILE | grep "$TESTDIR" | wc -l | tr -d ' ')
+if [ $findcnt -eq $EXPECTED ]; then
+  echo "Tests ok"
+  rm -f $LOGFILE
+  exit 0
+else
+  echo "Tests failed: expected $EXPECTED but found $findcnt bad file / folder names - check $LOGFILE"
+  exit 1
+fi
+
+

@@ -1,0 +1,79 @@
+#!/bin/bash
+
+
+
+# https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
+
+
+
+echo "Target: " $1
+
+
+
+echo
+echo "Find empty files / dirs"
+find $1 -empty \
+  | sort \
+  | grep -v "Trash-1000" \
+  | grep -v "lost+found"
+
+
+
+echo
+echo "Find trailing spaces"
+find $1 -name "*[ ]" \
+  | sort
+
+
+
+echo
+echo "Find Trailing dots"
+find $1 -name "*[\.]" \
+  | sort
+
+
+
+#  The following reserved characters:
+#  < (less than)
+#  > (greater than)
+#  : (colon)
+#  " (double quote)
+#  / (forward slash)
+#  \ (backslash)
+#  | (vertical bar or pipe)
+#  ? (question mark)
+#  * (asterisk)
+
+echo
+echo "Find bad characters"
+find $1 -name '*[\<\>\:\"\\\|\?\*]*' \
+  | sort
+
+
+
+echo
+echo "Find control characters"
+find $1 -name '*[[:cntrl:]*' \
+  | sort
+
+
+
+echo
+echo "Find reserved names"
+find $1 -iname 'CON' \
+     -o -iname 'PRN' \
+     -o -iname 'AUX' \
+     -o -iname 'NUL' \
+     -o -iname 'COM[1-9¹²³]' \
+     -o -iname 'LPT[1-9¹²³]' \
+  | sort
+
+
+
+echo
+echo "Find identical names when ignoring case"
+find $1 \
+  | sort \
+  | tr '[:upper:]' '[:lower:]' \
+  | uniq -d
+
