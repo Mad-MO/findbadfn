@@ -107,6 +107,12 @@ mkdir -p      "testdir/TrailingDots/testDirTrailingDots..."
 echo "test" > "testdir/TrailingDots/testDirTrailingDots.../notempty"
 echo "test" > "testdir/TrailingDots/testFileTrailingDots..."
 
+# Add files and folders for good examples
+echo "Add files and folders for good examples"
+mkdir -p      "testdir/Good/testDiräöüÄÖÜß()[]{}Good"
+echo "test" > "testdir/Good/testDiräöüÄÖÜß()[]{}Good/notempty"
+echo "test" > "testdir/Good/testFileäöüÄÖÜß()[]{}Good"
+
 # Detect case-insensitive file systems (e.g. Windows or macOS startup disk)
 if [ $(ls -l "testdir/CaseSensitive" | grep -i "case" | wc -l | tr -d ' ') -eq 4 ]; then
   echo "Case-sensitive file system detected"

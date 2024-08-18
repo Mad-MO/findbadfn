@@ -40,7 +40,7 @@ find $1 -name '*[\<\>\:\"\\\|\?\*]*' \
 #   https://www.gnu.org/software/grep/manual/html_node/Character-Classes-and-Bracket-Expressions.html
 echo
 echo "Find control characters"
-find $1 -name '*[![:print:]]*' \
+find $1 -name '*[![:print:]äöüÄÖÜß]*' \
   | sort \
   | sed 's/^/  /'
 
