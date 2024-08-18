@@ -7,38 +7,128 @@ TESTDIR="$(pwd)/testdir"
 
 
 
-# Add emtpy directory, which is dropped by git
-mkdir -p "testdir/Empty/testDirEmpty"
+# Delete old testdir
+echo "Delete old testdir"
+rm -rf "testdir"
 
-# Add case-sensitive test files, which make problems on case-insensitive file systems (e.g. Windows or macOS startup disk)
+# Add files and folders for bad characters testing
+echo "Add files and folders for bad characters testing"
+mkdir -p      "testdir/BadChars/testDir\"BadCharDoubleQuote"
+echo "test" > "testdir/BadChars/testDir\"BadCharDoubleQuote/notempty"
+mkdir -p      "testdir/BadChars/testDir*BadCharAsterisk"
+echo "test" > "testdir/BadChars/testDir*BadCharAsterisk/notempty"
+mkdir -p      "testdir/BadChars/testDir:BadCharColon"
+echo "test" > "testdir/BadChars/testDir:BadCharColon/notempty"
+mkdir -p      "testdir/BadChars/testDir\\BadCharBackslash"
+echo "test" > "testdir/BadChars/testDir\\BadCharBackslash/notempty"
+mkdir -p      "testdir/BadChars/testDir<BadCharLessThan"
+echo "test" > "testdir/BadChars/testDir<BadCharLessThan/notempty"
+mkdir -p      "testdir/BadChars/testDir>BadCharGreaterThan"
+echo "test" > "testdir/BadChars/testDir>BadCharGreaterThan/notempty"
+mkdir -p      "testdir/BadChars/testDir|BadCharPipe"
+echo "test" > "testdir/BadChars/testDir|BadCharPipe/notempty"
+echo "test" > "testdir/BadChars/testFile\"BadCharDoubleQuote"
+echo "test" > "testdir/BadChars/testFile*BadCharAsterisk"
+echo "test" > "testdir/BadChars/testFile:BadCharColon"
+echo "test" > "testdir/BadChars/testFile\\BadCharBackslash"
+echo "test" > "testdir/BadChars/testFile<BadCharLessThan"
+echo "test" > "testdir/BadChars/testFile>BadCharGreaterThan"
+echo "test" > "testdir/BadChars/testFile|BadCharPipe"
+
+# Add files and folders for case-sensitivity testing
+echo "Add files and folders for case-sensitivity testing"
+mkdir -p      "testdir/CaseSensitive/testDirCASE"
+echo "test" > "testdir/CaseSensitive/testDirCASE/notempty1"
+mkdir -p      "testdir/CaseSensitive/testDircase"
+echo "test" > "testdir/CaseSensitive/testDircase/notempty2"
 echo "test" > "testdir/CaseSensitive/testFileCASE"
 echo "test" > "testdir/CaseSensitive/testFilecase"
-mkdir -p "testdir/CaseSensitive/testDirCASE"
-echo "test" > "testdir/CaseSensitive/testDirCASE/.notempty1"
-mkdir -p "testdir/CaseSensitive/testDircase"
-echo "test" > "testdir/CaseSensitive/testDircase/.notempty2"
+
+# Add files and folders for control characters testing
+echo "Add files and folders for control characters testing"
+mkdir -p      "testdir/ControlChars/testDir$(printf '\011')ControlCharTab"
+echo "test" > "testdir/ControlChars/testDir$(printf '\011')ControlCharTab/notempty"
+echo "test" > "testdir/ControlChars/testFile$(printf '\011')ControlCharTab"
+
+# Add files and folders for empty testing
+echo "Add files and folders for empty testing"
+mkdir -p      "testdir/Empty/testDirEmpty"
+touch         "testdir/Empty/testFileEmpty"
+
+# Add files and folders for reserved names testing
+echo "Add files and folders for reserved names testing"
+mkdir -p      "testdir/ReservedNames"
+echo "test" > "testdir/ReservedNames/AUX"
+echo "test" > "testdir/ReservedNames/COM0"
+echo "test" > "testdir/ReservedNames/COM1"
+echo "test" > "testdir/ReservedNames/COM¹"
+echo "test" > "testdir/ReservedNames/COM2"
+echo "test" > "testdir/ReservedNames/COM²"
+echo "test" > "testdir/ReservedNames/COM3"
+echo "test" > "testdir/ReservedNames/COM³"
+echo "test" > "testdir/ReservedNames/COM4"
+echo "test" > "testdir/ReservedNames/COM5"
+echo "test" > "testdir/ReservedNames/COM6"
+echo "test" > "testdir/ReservedNames/COM7"
+echo "test" > "testdir/ReservedNames/COM8"
+echo "test" > "testdir/ReservedNames/COM9"
+echo "test" > "testdir/ReservedNames/CON"
+echo "test" > "testdir/ReservedNames/LPT0"
+echo "test" > "testdir/ReservedNames/LPT1"
+echo "test" > "testdir/ReservedNames/LPT¹"
+echo "test" > "testdir/ReservedNames/LPT2"
+echo "test" > "testdir/ReservedNames/LPT²"
+echo "test" > "testdir/ReservedNames/LPT3"
+echo "test" > "testdir/ReservedNames/LPT³"
+echo "test" > "testdir/ReservedNames/LPT4"
+echo "test" > "testdir/ReservedNames/LPT5"
+echo "test" > "testdir/ReservedNames/LPT6"
+echo "test" > "testdir/ReservedNames/LPT7"
+echo "test" > "testdir/ReservedNames/LPT8"
+echo "test" > "testdir/ReservedNames/LPT9"
+echo "test" > "testdir/ReservedNames/NUL"
+echo "test" > "testdir/ReservedNames/PRN"
+
+# Add files and folders for trailing spaces testing
+echo "Add files and folders for trailing spaces testing"
+mkdir -p      "testdir/TrailingSpaces/testDirTrailingSpace "
+echo "test" > "testdir/TrailingSpaces/testDirTrailingSpace /notempty"
+echo "test" > "testdir/TrailingSpaces/testFileTrailingSpace "
+mkdir -p      "testdir/TrailingSpaces/testDirTrailingSpaces   "
+echo "test" > "testdir/TrailingSpaces/testDirTrailingSpaces   /notempty"
+echo "test" > "testdir/TrailingSpaces/testFileTrailingSpaces   "
+
+# Add files and folders for trailing dots testing
+echo "Add files and folders for trailing dots testing"
+mkdir -p      "testdir/TrailingDots/testDirTrailingDot."
+echo "test" > "testdir/TrailingDots/testDirTrailingDot./notempty"
+echo "test" > "testdir/TrailingDots/testFileTrailingDot."
+mkdir -p      "testdir/TrailingDots/testDirTrailingDots..."
+echo "test" > "testdir/TrailingDots/testDirTrailingDots.../notempty"
+echo "test" > "testdir/TrailingDots/testFileTrailingDots..."
+
+# Detect case-insensitive file systems (e.g. Windows or macOS startup disk)
 if [ $(ls -l "testdir/CaseSensitive" | grep -i "case" | wc -l | tr -d ' ') -eq 4 ]; then
   echo "Case-sensitive file system detected"
-  EXPECTED="56"
+  EXPECTED="58"
 else
   echo "Case-insensitive file system detected"
-  EXPECTED="54"
+  EXPECTED="56"
 fi
 
 # Run Tool
+echo
 ./findbadfn $TESTDIR | tee $LOGFILE
-
-
 
 # Check results
 echo
-echo "Check results"
+echo -n "Check results: "
 findcnt=$(cat $LOGFILE | grep -i "$TESTDIR" | wc -l | tr -d ' ')
 if [ $findcnt -eq $EXPECTED ]; then
   echo "Tests ok"
   exit 0
 else
-  echo "Tests failed: expected $EXPECTED but found $findcnt bad file / folder names - check $LOGFILE"
+  echo "Tests failed, expected $EXPECTED but found $findcnt bad names -> check $LOGFILE"
   exit 1
 fi
 
