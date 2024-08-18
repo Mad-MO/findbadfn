@@ -121,14 +121,15 @@ echo
 ./findbadfn $TESTDIR | tee $LOGFILE
 
 # Check results
-echo
-echo -n "Check results: "
 findcnt=$(cat $LOGFILE | grep -i "$TESTDIR" | wc -l | tr -d ' ')
+rm $LOGFILE
+echo
+echo -n "Check results [$findcnt/$EXPECTED]: "
 if [ $findcnt -eq $EXPECTED ]; then
   echo "Tests ok"
   exit 0
 else
-  echo "Tests failed, expected $EXPECTED but found $findcnt bad names -> check $LOGFILE"
+  echo "Tests failed"
   exit 1
 fi
 
