@@ -3,13 +3,27 @@
 
 
 LOGFILE="test.log"
-EXPECTED="54"
 TESTDIR="$(pwd)/testdir"
 
 
 
-# Added emtpy directory, which is dropped by git
+# Add emtpy directory, which is dropped by git
 mkdir -p "testdir/Empty/testDirEmpty"
+
+# Add case-sensitive test files, which make problems on case-insensitive file systems (e.g. Windows or macOS startup disk)
+echo "test" > "testdir/CaseSensitive/testFileCASE"
+echo "test" > "testdir/CaseSensitive/testFilecase"
+mkdir -p "testdir/CaseSensitive/testDirCASE"
+echo "test" > "testdir/CaseSensitive/testDirCASE/.keep"
+mkdir -p "testdir/CaseSensitive/testDircase"
+echo "test" > "testdir/CaseSensitive/testDircase/.keep"
+if [ $(ls -l "testdir/CaseSensitive" | grep -i "case" | wc -l | tr -d ' ') -eq 4 ]; then
+  echo "Case-sensitive file system detected"
+  EXPECTED="56"
+else
+  echo "Case-insensitive file system detected"
+  EXPECTED="54"
+fi
 
 # Run Tool
 ./findbadfn $TESTDIR | tee $LOGFILE
@@ -22,7 +36,6 @@ echo "Check results"
 findcnt=$(cat $LOGFILE | grep "$TESTDIR" | wc -l | tr -d ' ')
 if [ $findcnt -eq $EXPECTED ]; then
   echo "Tests ok"
-  rm -f $LOGFILE
   exit 0
 else
   echo "Tests failed: expected $EXPECTED but found $findcnt bad file / folder names - check $LOGFILE"
