@@ -3,7 +3,7 @@
 
 
 LOGFILE="test.log"
-EXPECTED="25"
+EXPECTED="52"
 TESTDIR="$(pwd)/testdir"
 
 

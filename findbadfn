@@ -6,10 +6,6 @@
 
 
 
-echo "Target: " $1
-
-
-
 echo
 echo "Find empty files / dirs"
 find $1 -empty \
