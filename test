@@ -14,9 +14,9 @@ mkdir -p "testdir/Empty/testDirEmpty"
 echo "test" > "testdir/CaseSensitive/testFileCASE"
 echo "test" > "testdir/CaseSensitive/testFilecase"
 mkdir -p "testdir/CaseSensitive/testDirCASE"
-echo "test" > "testdir/CaseSensitive/testDirCASE/.keep"
+echo "test" > "testdir/CaseSensitive/testDirCASE/.notempty1"
 mkdir -p "testdir/CaseSensitive/testDircase"
-echo "test" > "testdir/CaseSensitive/testDircase/.keep"
+echo "test" > "testdir/CaseSensitive/testDircase/.notempty2"
 if [ $(ls -l "testdir/CaseSensitive" | grep -i "case" | wc -l | tr -d ' ') -eq 4 ]; then
   echo "Case-sensitive file system detected"
   EXPECTED="56"
@@ -33,7 +33,7 @@ fi
 # Check results
 echo
 echo "Check results"
-findcnt=$(cat $LOGFILE | grep "$TESTDIR" | wc -l | tr -d ' ')
+findcnt=$(cat $LOGFILE | grep -i "$TESTDIR" | wc -l | tr -d ' ')
 if [ $findcnt -eq $EXPECTED ]; then
   echo "Tests ok"
   exit 0

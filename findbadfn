@@ -86,8 +86,15 @@ find $1 -iname 'CON' \
 #   even though some file systems (such as a POSIX-compliant file system) may consider them as different."
 
 echo
-echo "Find identical names when ignoring case"
-find $1 \
+echo "Find identical files when ignoring case"
+find $1 -type f \
+  | sort \
+  | tr '[:upper:]' '[:lower:]' \
+  | uniq -d
+
+echo
+echo "Find identical folders when ignoring case"
+find $1 -type d \
   | sort \
   | tr '[:upper:]' '[:lower:]' \
   | uniq -d
