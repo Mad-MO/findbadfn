@@ -37,35 +37,40 @@ echo "Find empty files / dirs"
 find $1 -empty \
   | sort \
   | grep -v "Trash-1000" \
-  | grep -v "lost+found"
+  | grep -v "lost+found" \
+  | sed 's/^/  /'
 
 
 
 echo
 echo "Find trailing spaces"
 find $1 -name "*[ ]" \
-  | sort
+  | sort \
+  | sed 's/^/  /'
 
 
 
 echo
 echo "Find Trailing dots"
 find $1 -name "*[\.]" \
-  | sort
+  | sort \
+  | sed 's/^/  /'
 
 
 
 echo
 echo "Find bad characters"
 find $1 -name '*[\<\>\:\"\\\|\?\*]*' \
-  | sort
+  | sort \
+  | sed 's/^/  /'
 
 
 
 echo
 echo "Find control characters"
 find $1 -name '*[[:cntrl:]*' \
-  | sort
+  | sort \
+  | sed 's/^/  /'
 
 
 
@@ -77,7 +82,8 @@ find $1 -iname 'CON' \
      -o -iname 'NUL' \
      -o -iname 'COM[0-9¹²³]' \
      -o -iname 'LPT[0-9¹²³]' \
-  | sort
+  | sort \
+  | sed 's/^/  /'
 
 
 
@@ -90,12 +96,14 @@ echo "Find identical files when ignoring case"
 find $1 -type f \
   | sort \
   | tr '[:upper:]' '[:lower:]' \
-  | uniq -d
+  | uniq -d \
+  | sed 's/^/  /'
 
 echo
 echo "Find identical folders when ignoring case"
 find $1 -type d \
   | sort \
   | tr '[:upper:]' '[:lower:]' \
-  | uniq -d
+  | uniq -d \
+  | sed 's/^/  /'
 
