@@ -35,12 +35,11 @@ find $1 -name '*[\<\>\:\"\\\|\?\*]*' \
 
 # Search for control characters in filenames:
 #   "Characters whose integer representations are in the range from 1 through 31, ..."
-#   This should be handled by using the [:cntrl:] character class in the find command which matches characters 0 through 37, and 177 (DEL), but this does not work as expected.
-#   Instead, use the [:print:] character class which matches all printable characters, and then invert the match with [![:print:]].
+#   This is be handled by using the [:cntrl:] character class in the find command which matches characters 0 through 37, and 177 (DEL).
 #   https://www.gnu.org/software/grep/manual/html_node/Character-Classes-and-Bracket-Expressions.html
 echo
 echo "Find control characters"
-find $1 -name '*[![:print:]äöüÄÖÜß]*' \
+find $1 -name '*[[:cntrl:]]*' \
   | sort \
   | sed 's/^/  /'
 
