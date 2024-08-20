@@ -3,12 +3,15 @@
 LOGFILE="test.log"
 TESTDIR="$(pwd)/testdir"
 
+# Preparing test environment
+echo "Preparing test environment"
+
 # Delete old testdir
-echo "Delete old testdir"
+echo "  Delete old testdir"
 rm -rf "testdir"
 
 # Add files and folders for bad characters testing
-echo "Add files and folders for bad characters testing"
+echo "  Add files and folders for bad characters testing"
 mkdir -p      "testdir/BadChars/testDir\"BadCharDoubleQuote"
 echo "test" > "testdir/BadChars/testDir\"BadCharDoubleQuote/notempty"
 mkdir -p      "testdir/BadChars/testDir*BadCharAsterisk"
@@ -32,7 +35,7 @@ echo "test" > "testdir/BadChars/testFile>BadCharGreaterThan"
 echo "test" > "testdir/BadChars/testFile|BadCharPipe"
 
 # Add files and folders for case-sensitivity testing
-echo "Add files and folders for case-sensitivity testing"
+echo "  Add files and folders for case-sensitivity testing"
 mkdir -p      "testdir/CaseSensitive/testDirCASE"
 echo "test" > "testdir/CaseSensitive/testDirCASE/notempty1"
 mkdir -p      "testdir/CaseSensitive/testDircase"
@@ -41,18 +44,18 @@ echo "test" > "testdir/CaseSensitive/testFileCASE"
 echo "test" > "testdir/CaseSensitive/testFilecase"
 
 # Add files and folders for control characters testing
-echo "Add files and folders for control characters testing"
+echo "  Add files and folders for control characters testing"
 mkdir -p      "testdir/ControlChars/testDir$(printf '\011')ControlCharTab"
 echo "test" > "testdir/ControlChars/testDir$(printf '\011')ControlCharTab/notempty"
 echo "test" > "testdir/ControlChars/testFile$(printf '\011')ControlCharTab"
 
 # Add files and folders for empty testing
-echo "Add files and folders for empty testing"
+echo "  Add files and folders for empty testing"
 mkdir -p      "testdir/Empty/testDirEmpty"
 touch         "testdir/Empty/testFileEmpty"
 
 # Add files and folders for reserved names testing
-echo "Add files and folders for reserved names testing"
+echo "  Add files and folders for reserved names testing"
 mkdir -p      "testdir/ReservedNames"
 echo "test" > "testdir/ReservedNames/AUX"
 echo "test" > "testdir/ReservedNames/COM0"
@@ -86,7 +89,7 @@ echo "test" > "testdir/ReservedNames/NUL"
 echo "test" > "testdir/ReservedNames/PRN"
 
 # Add files and folders for trailing spaces testing
-echo "Add files and folders for trailing spaces testing"
+echo "  Add files and folders for trailing spaces testing"
 mkdir -p      "testdir/TrailingSpaces/testDirTrailingSpace "
 echo "test" > "testdir/TrailingSpaces/testDirTrailingSpace /notempty"
 echo "test" > "testdir/TrailingSpaces/testFileTrailingSpace "
@@ -95,7 +98,7 @@ echo "test" > "testdir/TrailingSpaces/testDirTrailingSpaces   /notempty"
 echo "test" > "testdir/TrailingSpaces/testFileTrailingSpaces   "
 
 # Add files and folders for trailing dots testing
-echo "Add files and folders for trailing dots testing"
+echo "  Add files and folders for trailing dots testing"
 mkdir -p      "testdir/TrailingDots/testDirTrailingDot."
 echo "test" > "testdir/TrailingDots/testDirTrailingDot./notempty"
 echo "test" > "testdir/TrailingDots/testFileTrailingDot."
@@ -104,34 +107,37 @@ echo "test" > "testdir/TrailingDots/testDirTrailingDots.../notempty"
 echo "test" > "testdir/TrailingDots/testFileTrailingDots..."
 
 # Add files and folders for good examples
-echo "Add files and folders for good examples"
+echo "  Add files and folders for good examples"
 mkdir -p      "testdir/Good/testDiräöüÄÖÜß()[]{}Good"
 echo "test" > "testdir/Good/testDiräöüÄÖÜß()[]{}Good/notempty"
 echo "test" > "testdir/Good/testFileäöüÄÖÜß()[]{}Good"
 
 # Detect case-insensitive file systems (e.g. Windows or macOS startup disk)
+echo
+echo "Detect file system"
 if [ $(ls -l "testdir/CaseSensitive" | grep -i "case" | wc -l | tr -d ' ') -eq 4 ]; then
-  echo "Case-sensitive file system detected"
+  echo "  Case-sensitive file system detected"
   EXPECTED="58"
 else
-  echo "Case-insensitive file system detected"
+  echo "  Case-insensitive file system detected"
   EXPECTED="56"
 fi
 
 # Run Tool
 echo
+echo "Run tool"
 ./findbadfn $TESTDIR | tee $LOGFILE
 
 # Check results
 findcnt=$(cat $LOGFILE | grep -i "$TESTDIR" | wc -l | tr -d ' ')
 rm $LOGFILE
 echo
-echo -n "Check results [$findcnt/$EXPECTED]: "
+echo "Check results"
 if [ $findcnt -eq $EXPECTED ]; then
-  echo "Tests ok"
+  echo "  Tests ok [$findcnt/$EXPECTED]"
   exit 0
 else
-  echo "Tests failed"
+  echo "  Tests failed [$findcnt/$EXPECTED]"
   exit 1
 fi
 
