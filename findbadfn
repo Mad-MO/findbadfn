@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# Based on filename restrictions in Windows:
-#   https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
-
-# Search for trailing spaces or dots in filenames:
+# Based on file name restrictions in Windows https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
+# Search for trailing spaces or dots in file and directory names:
 #   "Do not end a file or directory name with a space or a period."
 echo
 echo "Find trailing spaces"
@@ -17,12 +15,12 @@ find $1 -name "*[\.]" \
   | sort \
   | sed 's/^/  /'
 
-# Search for files and directories that use the following reserved characters:
+# Search for file and directory names that use the following reserved characters:
 #   < (less than)
 #   > (greater than)
 #   : (colon)
 #   " (double quote)
-#   / (forward slash)
+#   / (forward slash)  ==> This can't be used in Linux, therefor we don't search for it
 #   \ (backslash)
 #   | (vertical bar or pipe)
 #   ? (question mark)
@@ -33,7 +31,7 @@ find $1 -name '*[\<\>\:\"\\\|\?\*]*' \
   | sort \
   | sed 's/^/  /'
 
-# Search for control characters in filenames:
+# Search for control characters in file and directory names:
 #   "Characters whose integer representations are in the range from 1 through 31, ..."
 #   This is be handled by using the [:cntrl:] character class in the find command which matches characters 0 through 37, and 177 (DEL).
 #   https://www.gnu.org/software/grep/manual/html_node/Character-Classes-and-Bracket-Expressions.html
@@ -51,7 +49,7 @@ find $1 -name '*[[:cntrl:]]*' \
 #   COM0, COM1, COM2, COM3, COM4, COM5, COM6, COM7, COM8, COM9, COM¹, COM², COM³,
 #   LPT0, LPT1, LPT2, LPT3, LPT4, LPT5, LPT6, LPT7, LPT8, LPT9, LPT¹, LPT², and LPT³
 echo
-echo "Find reserved filenames"
+echo "Find reserved file names"
 find $1 -iname 'CON' \
      -o -iname 'PRN' \
      -o -iname 'AUX' \
@@ -70,21 +68,22 @@ find $1 -empty \
   | grep -v "lost+found" \
   | sed 's/^/  /'
 
-
-
-# Assume case-insensitive filesystem and search for directories and files that differ only by case:
+# Assume case-insensitive filesystem and search for file names that differ only by case:
 #   "Do not assume case sensitivity. For example, consider the names OSCAR, Oscar, and oscar to be the same,
 #   even though some file systems (such as a POSIX-compliant file system) may consider them as different."
 echo
-echo "Find identical files when ignoring case"
+echo "Find identical file names when ignoring case"
 find $1 -type f \
   | sort \
   | tr '[:upper:]' '[:lower:]' \
   | uniq -d \
   | sed 's/^/  /'
 
+# Assume case-insensitive filesystem and search for directory names that differ only by case:
+#   "Do not assume case sensitivity. For example, consider the names OSCAR, Oscar, and oscar to be the same,
+#   even though some file systems (such as a POSIX-compliant file system) may consider them as different."
 echo
-echo "Find identical directories when ignoring case"
+echo "Find identical directory names when ignoring case"
 find $1 -type d \
   | sort \
   | tr '[:upper:]' '[:lower:]' \
