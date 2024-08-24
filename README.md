@@ -7,6 +7,8 @@ This script helps to find file and directory names on a Linux system which will 
 
 ## Screenshot
 
+TODO: Screenshot
+
 ## Working principle
 
 To find the naming restrictions mentioned in <https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file>, basically the following commands are used in the script:

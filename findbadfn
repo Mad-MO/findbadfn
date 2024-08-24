@@ -1,5 +1,13 @@
 #!/bin/bash
 
+
+
+# TODO: Change "$1" to "$*"
+# TODO: Add Template
+# TODO: Add help
+
+
+
 # Based on file name restrictions in Windows https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
 # Search for trailing spaces or dots in file and directory names:
 #   "Do not end a file or directory name with a space or a period."
