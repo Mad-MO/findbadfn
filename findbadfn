@@ -2,7 +2,6 @@
 
 
 
-# TODO: Change "$1" to "$*"
 # TODO: Add Template
 # TODO: Add help
 
@@ -13,13 +12,13 @@
 #   "Do not end a file or directory name with a space or a period."
 echo
 echo "Find trailing spaces"
-find $1 -name "*[ ]" \
+find $* -name "*[ ]" \
   | sort \
   | sed 's/^/  /'
 
 echo
 echo "Find Trailing dots"
-find $1 -name "*[\.]" \
+find $* -name "*[\.]" \
   | sort \
   | sed 's/^/  /'
 
@@ -35,7 +34,7 @@ find $1 -name "*[\.]" \
 #   * (asterisk)
 echo
 echo "Find bad characters"
-find $1 -name '*[\<\>\:\"\\\|\?\*]*' \
+find $* -name '*[\<\>\:\"\\\|\?\*]*' \
   | sort \
   | sed 's/^/  /'
 
@@ -45,7 +44,7 @@ find $1 -name '*[\<\>\:\"\\\|\?\*]*' \
 #   https://www.gnu.org/software/grep/manual/html_node/Character-Classes-and-Bracket-Expressions.html
 echo
 echo "Find control characters"
-find $1 -name '*[[:cntrl:]]*' \
+find $* -name '*[[:cntrl:]]*' \
   | sort \
   | sed 's/^/  /'
 
@@ -58,7 +57,7 @@ find $1 -name '*[[:cntrl:]]*' \
 #   LPT0, LPT1, LPT2, LPT3, LPT4, LPT5, LPT6, LPT7, LPT8, LPT9, LPT¹, LPT², and LPT³
 echo
 echo "Find reserved file names"
-find $1 -iname 'CON' \
+find $* -iname 'CON' \
      -o -iname 'PRN' \
      -o -iname 'AUX' \
      -o -iname 'NUL' \
@@ -70,7 +69,7 @@ find $1 -iname 'CON' \
 # Search for empty files or directories:
 echo
 echo "Find empty files and directiories"
-find $1 -empty \
+find $* -empty \
   | sort \
   | grep -v "Trash-1000" \
   | grep -v "lost+found" \
@@ -81,7 +80,7 @@ find $1 -empty \
 #   even though some file systems (such as a POSIX-compliant file system) may consider them as different."
 echo
 echo "Find identical file names when ignoring case"
-find $1 -type f \
+find $* -type f \
   | sort \
   | tr '[:upper:]' '[:lower:]' \
   | uniq -d \
@@ -92,7 +91,7 @@ find $1 -type f \
 #   even though some file systems (such as a POSIX-compliant file system) may consider them as different."
 echo
 echo "Find identical directory names when ignoring case"
-find $1 -type d \
+find $* -type d \
   | sort \
   | tr '[:upper:]' '[:lower:]' \
   | uniq -d \
