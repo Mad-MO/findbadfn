@@ -1,5 +1,5 @@
 
-# findBadFN - Find bad Windows file and directory names
+# findbadfn - Find bad Windows file and directory names
 
 ## Brief
 
@@ -9,9 +9,23 @@ This script helps to find file and directory names on a Linux system which will 
 
 TODO: Screenshot
 
+## Usage
+
+To Check a folder recursive:
+
+```Bash
+#> ./findbadfn /path
+```
+
+For doc and more info:
+
+```Bash
+#> ./findbadfn --help
+```
+
 ## Working principle
 
-To find the naming restrictions mentioned in <https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file>, basically the following commands are used in the script:
+To find violations of the naming restrictions mentioned in <https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file> the following commands are used:
 
 ```Bash
 # "Do not end a file or directory name with a space or a period."
@@ -45,16 +59,10 @@ find /path -type d | sort | tr '[:upper:]' '[:lower:]' | uniq -d
 
 It would be possible to combine most searches in one find command which would speed up the search process. But splitting up the searches makes it easier to differentiate the reason why a name is declared bad (i.e. a trailing space is hard to spot in a list of file or directory names).
 
-## Usage
+## Development
 
-To Check a folder recursive:
-
-```Bash
-#> findbadfn /path
-```
-
-For doc and more info:
+The script "runtests" generates the directory "testdir" with some bad file and directory names and checks if the script finds them all:
 
 ```Bash
-#> findbadfn --help
+#> ./runtests
 ```
