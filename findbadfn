@@ -17,7 +17,7 @@ find $* -name "*[ ]" \
   | sed 's/^/  /'
 
 echo
-echo "Find Trailing dots"
+echo "Find trailing dots"
 find $* -name "*[\.]" \
   | sort \
   | sed 's/^/  /'
@@ -68,7 +68,7 @@ find $* -iname 'CON' \
 
 # Search for empty files or directories:
 echo
-echo "Find empty files and directiories"
+echo "Find empty files and directories"
 find $* -empty \
   | sort \
   | grep -v "Trash-1000" \
