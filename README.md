@@ -1,7 +1,7 @@
 
 # findbadfn - Find bad Windows file and directory names
 
-## Brief
+## Description
 
 This script helps to find file and directory names on a Linux system which will lead to Problems when shared via SMB to a Windows or Mac system.
 
@@ -23,7 +23,7 @@ For doc and more info:
 #> ./findbadfn --help
 ```
 
-## Working principle
+## Background
 
 To find violations of the naming restrictions mentioned in <https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file> the following commands are used:
 
@@ -66,3 +66,11 @@ The script "runtests" generates the directory "testdir" with some bad file and d
 ```Bash
 #> ./runtests
 ```
+
+## License
+
+MIT License, see "License.txt".
+
+## Author
+
+By domo
