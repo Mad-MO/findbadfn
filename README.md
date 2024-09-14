@@ -67,10 +67,6 @@ The script "runtests" generates the directory "testdir" with some bad file and d
 #> ./runtests
 ```
 
-## Development
-
-Uncomment "set -x".
-
 ## License
 
 MIT License, see "License.txt".
