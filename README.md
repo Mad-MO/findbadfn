@@ -29,7 +29,7 @@ To find violations of the naming restrictions mentioned in <https://learn.micros
 
 ```Bash
 # "Do not end a file or directory name with a space or a period."
-find /path -name "*[ ]" -
+find /path -name "*[ ]"
 find /path -name "*[\.]"
 
 # < (less than)
