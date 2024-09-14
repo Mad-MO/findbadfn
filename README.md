@@ -1,5 +1,5 @@
 
-# findbadfn - Find bad Windows file and directory names
+# findbadfn (Find bad Windows file and directory names)
 
 ## Description
 
@@ -14,7 +14,7 @@ TODO: Screenshot
 To Check a folder recursive:
 
 ```Bash
-#> ./findbadfn /path
+#> ./findbadfn /path1 /path2 ...
 ```
 
 For doc and more info:
@@ -66,6 +66,10 @@ The script "runtests" generates the directory "testdir" with some bad file and d
 ```Bash
 #> ./runtests
 ```
+
+## Development
+
+Uncomment "set -x".
 
 ## License
 
