@@ -7,7 +7,7 @@ This script helps to find file and directory names on a Linux system which will 
 
 ## Screenshot
 
-TODO: Screenshot
+![Screenshot](./Screenshot.png)
 
 ## Usage
 
