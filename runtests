@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 LOGFILE="test.log"
 TESTDIR="$(pwd)/testdir"
@@ -129,7 +129,7 @@ echo "Run tool"
 ./findbadfn $TESTDIR | tee $LOGFILE
 
 # Check results
-findcnt=$(cat $LOGFILE | grep -i "$TESTDIR" | wc -l | tr -d ' ')
+findcnt=$(cat $LOGFILE | grep -i "$TESTDIR/" | wc -l | tr -d ' ')
 rm $LOGFILE
 echo
 echo "Check results"
