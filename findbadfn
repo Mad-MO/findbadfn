@@ -72,6 +72,7 @@ echo
 FLAG=""
 VAR=""
 # TODO: Add help
+# TODO: Check for missing parameters
 for x in $*; do        # Method 1: Check all parameters in a loop without changing them
   if [ "$x" = "-h" ] || [ "$x" = "--help" ]; then
     echo "Usage: $0 [OPTION]"
