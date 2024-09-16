@@ -3,7 +3,7 @@
 
 ## Description
 
-This script helps to find file and directory names on a Linux system which will lead to Problems when shared via SMB to a Windows or Mac system.
+This script helps to find file and directory names on a Linux system which will lead to Problems when shared via SMB to a Windows or Mac system. It reads file and directory names recursively but doesn't write anything.
 
 ## Screenshot
 

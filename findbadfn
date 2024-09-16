@@ -69,15 +69,16 @@ fi
 echo
 
 # Check Parameters
-FLAG=""
-VAR=""
-# TODO: Add help
-# TODO: Check for missing parameters
-for x in $*; do        # Method 1: Check all parameters in a loop without changing them
+if [ $# -eq 0 ]; then
+  echo -e "No parameters given! Try $color_mark\"-h\"$color_off or $color_mark\"--help\"$color_off."
+  exit 1
+fi
+for x in $*; do # Run through parameter list
   if [ "$x" = "-h" ] || [ "$x" = "--help" ]; then
-    echo "Usage: $0 [OPTION]"
+    echo "Usage: $0 [OPTIONS] path1 [path2] [...]"
     echo
-    echo "Do some fancy stuff..."
+    echo "This script helps to find file and directory names on a Linux system which will lead to Problems when shared via SMB to a Windows or Mac system."
+    echo "It reads file and directory names recursively but doesn't write anything."
     echo
     echo "Options"
     echo "-h, --help      Print this help"
@@ -86,6 +87,16 @@ for x in $*; do        # Method 1: Check all parameters in a loop without changi
     echo " 0  if OK"
     echo " 1  if ERROR"
     exit 0
+  elif [ "$x" = "." ] || [ "$x" = "./" ] || [ "$x" = ".." ] || [ "$x" = "../" ]; then
+    echo -e "Parameter $color_mark$x$color_off is not allowed!"
+    echo "This conflicts with trailing dot detection. Try using an absolute path instead."
+    exit 1
+  elif [ ! -e "$x" ]; then
+    echo -e "File or directory $color_mark$x$color_off does not exist!"
+    exit 1
+  elif [ ! -r "$x" ]; then
+    echo -e "File or directory $color_mark$x$color_off is not readable!"
+    exit 1
   fi
 done
 
