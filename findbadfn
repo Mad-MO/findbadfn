@@ -8,7 +8,7 @@
 
 # Script info
 script_name="findbadfn"
-script_version="v0.2"
+script_version="v0.3"
 script_tools="echo date find sort tr uniq"
 
 
