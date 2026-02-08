@@ -1,5 +1,7 @@
 
-# findbadfn (Find bad Windows file and directory names)
+# findbadfn
+
+Find bad Windows file and directory names
 
 ## Description
 
