@@ -5,6 +5,13 @@
 # License: MIT
 # Brief:   Find bad Windows file and directory names
 
+# TODO: Check for "._*" files created by MacOS
+# TODO: Check for "Thumbs.db" files created by Windows
+# TODO: Check for "desktop.ini" files created by Windows
+# TODO: Check for "Thumbs.db" files created by Windows
+# TODO: Check for "pagefile.sys" Windows virtual memory (paging) file
+# TODO: Check for "hiberfil.sys" Used for hibernation data
+# TODO: Check for "swapfile.sys" Used for Windows 8 and later page swapping
 
 # Script info
 script_name="findbadfn"
